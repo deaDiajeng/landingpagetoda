@@ -8,6 +8,7 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galeri</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Teacher</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Login</a></li>
             </ul>
         </div>
     </div>
