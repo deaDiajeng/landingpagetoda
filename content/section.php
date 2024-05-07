@@ -45,10 +45,10 @@
                 <!-- Portfolio item 1-->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                        <img class="img-fluid" src="assets/img/portfolio/baca.jpg" alt="..." />
+                        <img class="img-fluid" src="assets/img/portfolio/belajar.jpg" alt="..." />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Threads</div>
+                        <div class="portfolio-caption-heading">MATERI</div>
                     </div>
                 </div>
             </div>
@@ -56,10 +56,10 @@
                 <!-- Portfolio item 2-->
                 <div class="portfolio-item">
                 <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                    <img class="img-fluid" src="assets/img/portfolio/nulis.jpg" alt="..." />
+                    <img class="img-fluid" src="assets/img/portfolio/menulis.jpg" alt="..." />
                 </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Explore</div>
+                        <div class="portfolio-caption-heading">MENULIS</div>
                     </div>
                 </div>
             </div>
@@ -67,10 +67,10 @@
                 <!-- Portfolio item 3-->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                        <img class="img-fluid" src="assets/img/portfolio/hafal.jpg" alt="..." />
+                        <img class="img-fluid" src="assets/img/portfolio/shalat.jpg" alt="..." />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Finish</div>
+                        <div class="portfolio-caption-heading">PRAKTIK SHALAT</div>
                     </div>
                 </div>
             </div>
@@ -78,10 +78,10 @@
                 <!-- Portfolio item 1-->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                        <img class="img-fluid" src="assets/img/portfolio/game.jpg" alt="..." />
+                        <img class="img-fluid" src="assets/img/portfolio/games.jpg" alt="..." />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Threads</div>
+                        <div class="portfolio-caption-heading">GAMES</div>
                     </div>
                 </div>
             </div>
@@ -89,10 +89,10 @@
                         <!-- Portfolio item 2-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <img class="img-fluid" src="assets/img/portfolio/materi.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/jilid.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Explore</div>
+                                <div class="portfolio-caption-heading">JILID</div>
                             </div>
                         </div>
                     </div>
@@ -100,10 +100,10 @@
                         <!-- Portfolio item 3-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                <img class="img-fluid" src="assets/img/portfolio/hafalan.jpg" alt="..." />
+                                <img class="img-fluid" src="assets/img/portfolio/setor.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Finish</div>
+                                <div class="portfolio-caption-heading">SETOR HAFALAN</div>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                 </div>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/opening.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
@@ -130,7 +130,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/murojaah.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
@@ -140,7 +140,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/belajar.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
@@ -150,7 +150,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/jilid.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
@@ -160,7 +160,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/5.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/penutupan.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
@@ -170,7 +170,7 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/test.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4></h4>
