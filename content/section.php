@@ -33,6 +33,8 @@
         </div>
     </div>
 </section>
+
+
 <!-- Portfolio Grid-->
 <section class="page-section bg-light" id="portfolio">
      <div class="container">
@@ -111,6 +113,8 @@
                 </div>
             </div>
         </section>
+
+
         <!-- About-->
         <section class="page-section" id="about">
             <div class="container">
@@ -193,6 +197,8 @@
                 </ul>
             </div>
         </section>
+
+
         <!-- Team-->
         <section class="page-section bg-light" id="team">
             <div class="container">
@@ -203,35 +209,35 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Lisna Oktaviani</h4>
                             <p class="text-muted">Kepala Sekolah</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Zulhida</h4>
                             <p class="text-muted">Administrasi</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Diajeng Julia Larasati</h4>
                             <p class="text-muted">Pendaming</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Maulida</h4>
                             <p class="text-muted">Walas TA</p>
                             </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/intan.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Intan Delima</h4>
                             <p class="text-muted">Walas BA</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
@@ -241,7 +247,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/" alt="..." />
                             <h4>Namirah</h4>
                             <p class="text-muted">Walas Alif</p>
                         </div>
