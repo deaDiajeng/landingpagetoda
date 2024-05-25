@@ -1,9 +1,6 @@
 <?php
 require_once 'koneksi.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +23,7 @@ require_once 'koneksi.php';
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -36,7 +33,7 @@ require_once 'koneksi.php';
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -47,9 +44,30 @@ require_once 'koneksi.php';
                 CMS
             </div>
             <!-- CMS Links -->
-            <?php include('cms/galeri.php'); ?>
-            <?php include('cms/pelajaran.php'); ?>
-            <?php include('cms/guru.php'); ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="galerids.php" data-toggle="collapse" data-target="#collapseGaleri"
+                    aria-expanded="true" aria-controls="collapseGaleri">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Galeri</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="guruds.php" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Guru</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="pelajarands.php" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Pelajaran</span>
+                </a>
+            </li>
+            <?php 
+            include('cms/galeri.php');
+            include('cms/pelajaran.php');
+            include('cms/guru.php');
+            ?>
         </ul>
         <!-- End of Sidebar -->
 
@@ -88,7 +106,7 @@ require_once 'koneksi.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Galeri</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Sensei</h1>
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Sample Gallery Content -->
@@ -109,11 +127,7 @@ require_once 'koneksi.php';
                                         <td>Sample Action</td>
                                         <td><img src="assets/img/sample.jpg" class="img-fluid"></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Another Action</td>
-                                        <td><img src="assets/img/another-sample.jpg" class="img-fluid"></td>
-                                    </tr>
+                                
                                     <!-- You can add more rows dynamically here -->
                                 </tbody>
                             </table>
