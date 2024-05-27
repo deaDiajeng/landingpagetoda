@@ -122,18 +122,48 @@ require_once 'koneksi.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                
-                                    <!-- You can add more rows dynamically here -->
+                                <?php
+                                    // Database connection parameters
+                                    $host = 'localhost';
+                                    $db = 'landingpage';
+                                    $user = 'root';
+                                    $pass = '';
+
+                                    // Data Source Name
+                                    $dsn = "mysql:host=$host;dbname=$db";
+                                    // PDO options
+                                    $options = [
+                                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                                        PDO::ATTR_EMULATE_PREPARES   => false,
+                                    ];
+
+                                    try {
+                                        // Create PDO instance
+                                        $pdo = new PDO($dsn, $user, $pass);
+                                    } catch (\PDOException $e) {
+                                        // Handle connection error
+                                        throw new \PDOException($e->getMessage(), (int)$e->getCode());
+                                    }
+
+                                     // SQL query to fetch data
+                                    $sql = 'SELECT id_pic, kegiatan, gambar FROM galeri';
+
+                                    // Execute the query
+                                    $stmt = $pdo->query($sql);
+
+                                    // Loop through the results and output table rows
+                                    while ($row = $stmt->fetch()) {
+                                        echo '<tr>';
+                                        echo '<td>' . htmlspecialchars($row['kegiatan']) . '</td>';
+                                        echo '<td><img src="assets/img' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td>';
+                                        echo '<a href="edit.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-primary btn-sm">Edit</a> ';
+                                        echo '<a href="delete.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-danger btn-sm">Delete</a>';
+                                        echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

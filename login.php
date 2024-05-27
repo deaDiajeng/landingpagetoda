@@ -1,6 +1,8 @@
     <?php 
     require_once 'koneksi.php';
     ?>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     
     <div class="container">
         <!-- Outer Row -->
@@ -44,8 +46,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
