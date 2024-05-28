@@ -63,11 +63,6 @@ require_once 'koneksi.php';
                         <span>Pelajaran</span>
                 </a>
             </li>
-            <?php 
-            include('cms/galeri.php');
-            include('cms/pelajaran.php');
-            include('cms/guru.php');
-            ?>
         </ul>
         <!-- End of Sidebar -->
 
@@ -115,14 +110,14 @@ require_once 'koneksi.php';
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID_pic</th>
-                                        <th>Kegiatan</th>
+                                        <th>Judul</th>
                                         <th>Img</th>
+                                        <th>Keterangan</th>
                                         <th>Act</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                     // Database connection parameters
                                     $host = 'localhost';
                                     $db = 'landingpage';
@@ -147,7 +142,7 @@ require_once 'koneksi.php';
                                     }
 
                                      // SQL query to fetch data
-                                    $sql = 'SELECT id_pic, kegiatan, gambar FROM galeri';
+                                    $sql = 'SELECT id_pel, judul, gambar, ket FROM pelajaran';
 
                                     // Execute the query
                                     $stmt = $pdo->query($sql);
@@ -155,11 +150,12 @@ require_once 'koneksi.php';
                                     // Loop through the results and output table rows
                                     while ($row = $stmt->fetch()) {
                                         echo '<tr>';
-                                        echo '<td>' . htmlspecialchars($row['kegiatan']) . '</td>';
-                                        echo '<td><img src="assets/img' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td>' . htmlspecialchars($row['judul']) . '</td>';
+                                        echo '<td><img src="assets/img' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['judul']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td>' . htmlspecialchars($row['ket']) . '</td>';
                                         echo '<td>';
-                                        echo '<a href="edit.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-primary btn-sm">Edit</a> ';
-                                        echo '<a href="delete.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-danger btn-sm">Delete</a>';
+                                        echo '<a href="edit.php?id=' . htmlspecialchars($row['id_pel']) . '" class="btn btn-primary btn-sm">Edit</a> ';
+                                        echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_pel']) . '&type=pelajaran" class="btn btn-danger btn-sm">Delete</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }

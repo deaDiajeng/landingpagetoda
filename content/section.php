@@ -22,7 +22,7 @@ try {
 <?php
 include('isi_section/servis.php');
 include('isi_section/galeri.php');
-include('isi_section/alur.php');
+include('isi_section/pelajaran.php');
 include('isi_section/guru.php');
 ?>
 

@@ -63,11 +63,6 @@ require_once 'koneksi.php';
                         <span>Pelajaran</span>
                 </a>
             </li>
-            <?php 
-            include('cms/galeri.php');
-            include('cms/pelajaran.php');
-            include('cms/guru.php');
-            ?>
         </ul>
         <!-- End of Sidebar -->
 
@@ -122,7 +117,7 @@ require_once 'koneksi.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                <?php
                                     // Database connection parameters
                                     $host = 'localhost';
                                     $db = 'landingpage';
@@ -130,7 +125,7 @@ require_once 'koneksi.php';
                                     $pass = '';
 
                                     // Data Source Name
-                                    $dsn = "mysql:host=$host;dbname=$db";
+                                    $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";  // Added charset for proper encoding
                                     // PDO options
                                     $options = [
                                         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -140,30 +135,35 @@ require_once 'koneksi.php';
 
                                     try {
                                         // Create PDO instance
-                                        $pdo = new PDO($dsn, $user, $pass);
+                                        $pdo = new PDO($dsn, $user, $pass, $options);
                                     } catch (\PDOException $e) {
                                         // Handle connection error
                                         throw new \PDOException($e->getMessage(), (int)$e->getCode());
                                     }
 
-                                     // SQL query to fetch data
+                                    // SQL query to fetch data from galeri table
                                     $sql = 'SELECT id_pic, kegiatan, gambar FROM galeri';
-
-                                    // Execute the query
                                     $stmt = $pdo->query($sql);
 
                                     // Loop through the results and output table rows
                                     while ($row = $stmt->fetch()) {
                                         echo '<tr>';
                                         echo '<td>' . htmlspecialchars($row['kegiatan']) . '</td>';
-                                        echo '<td><img src="assets/img' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td><img src="assets/img/' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
                                         echo '<td>';
                                         echo '<a href="edit.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-primary btn-sm">Edit</a> ';
-                                        echo '<a href="delete.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-danger btn-sm">Delete</a>';
+                                        echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_pic']) . '&type=galeri" class="btn btn-danger btn-sm">Delete</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }
                                     ?>
+
+                                    <?php
+                                    if (isset($_GET['message']) && $_GET['message'] == 'deleted') {
+                                        echo '<div class="alert alert-success">Record deleted successfully.</div>';
+                                    }
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>

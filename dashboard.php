@@ -49,7 +49,7 @@
                 CMS
             </div>
 
-            <!-- CMS Links -->
+            <!-- CMS Button Links -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="galerids.php" data-toggle="collapse" data-target="#collapseGaleri"
                     aria-expanded="true" aria-controls="collapseGaleri">
@@ -69,12 +69,6 @@
                         <span>Pelajaran</span>
                 </a>
             </li>
-            
-            <!-- <?php
-            include('cms/galeri.php');
-            include('cms/pelajaran.php');
-            include('cms/guru.php');
-            ?> -->
         </ul>
         <!-- End of Sidebar -->
 

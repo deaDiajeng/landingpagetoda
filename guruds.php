@@ -63,11 +63,6 @@ require_once 'koneksi.php';
                         <span>Pelajaran</span>
                 </a>
             </li>
-            <?php 
-            include('cms/galeri.php');
-            include('cms/pelajaran.php');
-            include('cms/guru.php');
-            ?>
         </ul>
         <!-- End of Sidebar -->
 
@@ -115,20 +110,56 @@ require_once 'koneksi.php';
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID_pic</th>
-                                        <th>Kegiatan</th>
+                                        <th>Nama</th>
                                         <th>Img</th>
+                                        <th>Jabatan</th>
                                         <th>Act</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sample Action</td>
-                                        <td><img src="assets/img/sample.jpg" class="img-fluid"></td>
-                                    </tr>
-                                
-                                    <!-- You can add more rows dynamically here -->
+                                    <?php
+                                    // Database connection parameters
+                                    $host = 'localhost';
+                                    $db = 'landingpage';
+                                    $user = 'root';
+                                    $pass = '';
+
+                                    // Data Source Name
+                                    $dsn = "mysql:host=$host;dbname=$db";
+                                    // PDO options
+                                    $options = [
+                                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                                        PDO::ATTR_EMULATE_PREPARES   => false,
+                                    ];
+
+                                    try {
+                                        // Create PDO instance
+                                        $pdo = new PDO($dsn, $user, $pass);
+                                    } catch (\PDOException $e) {
+                                        // Handle connection error
+                                        throw new \PDOException($e->getMessage(), (int)$e->getCode());
+                                    }
+
+                                     // SQL query to fetch data
+                                    $sql = 'SELECT id_teach, nama, foto, jabatan FROM guru';
+
+                                    // Execute the query
+                                    $stmt = $pdo->query($sql);
+
+                                    // Loop through the results and output table rows
+                                    while ($row = $stmt->fetch()) {
+                                        echo '<tr>';
+                                        echo '<td>' . htmlspecialchars($row['nama']) . '</td>';
+                                        echo '<td><img src="assets/img/' . htmlspecialchars($row['foto']) . '" alt="' . htmlspecialchars($row['nama']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td>' . htmlspecialchars($row['jabatan']) . '</td>';
+                                        echo '<td>';
+                                        echo '<a href="edit.php?id=' . htmlspecialchars($row['id_teach']) . '" class="btn btn-primary btn-sm">Edit</a> ';
+                                        echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_teach']) . '&type=guru" class="btn btn-danger btn-sm">Delete</a>';
+                                        echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
