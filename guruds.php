@@ -101,7 +101,10 @@ require_once 'koneksi.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Sensei</h1>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h1 class="h3 text-gray-800">Guru</h1>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addGuruModal">Tambah Guru</button>
+                    </div>
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Sample Gallery Content -->
@@ -154,7 +157,6 @@ require_once 'koneksi.php';
                                         echo '<td><img src="assets/img/' . htmlspecialchars($row['foto']) . '" alt="' . htmlspecialchars($row['nama']) . '" style="width: 100px; height: auto;"></td>';
                                         echo '<td>' . htmlspecialchars($row['jabatan']) . '</td>';
                                         echo '<td>';
-                                        echo '<a href="add.php?id=' . htmlspecialchars($row['id_teach']) . '" class="btn btn-primary btn-sm">Add</a> ';
                                         echo '<a href="edit.php?id=' . htmlspecialchars($row['id_teach']) . '" class="btn btn-secondary btn-sm">Edit</a> ';
                                         echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_teach']) . '&type=guru" class="btn btn-danger btn-sm">Delete</a>';
                                         echo '</td>';
