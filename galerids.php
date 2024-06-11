@@ -1,5 +1,9 @@
 <?php
 require_once 'koneksi.php';
+// Include modal tambah galeri
+include 'action/gallery/addModal.php';
+// Include modal edit galeri
+include 'action/gallery/editModal.php';
 ?>
 <head>
     <meta charset="utf-8">
@@ -13,6 +17,7 @@ require_once 'koneksi.php';
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -101,7 +106,10 @@ require_once 'koneksi.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Galeri</h1>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h1 class="h3 text-gray-800">Galeri</h1>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addGalleryModal">Tambah Galeri</button>
+                    </div>
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Sample Gallery Content -->
@@ -112,8 +120,8 @@ require_once 'koneksi.php';
                                     <tr>
                                         <!-- <th>ID_pic</th> -->
                                         <th>Kegiatan</th>
-                                        <th>Img</th>
-                                        <th>Act</th>
+                                        <th>Gambar</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,19 +157,21 @@ require_once 'koneksi.php';
                                     while ($row = $stmt->fetch()) {
                                         echo '<tr>';
                                         echo '<td>' . htmlspecialchars($row['kegiatan']) . '</td>';
-                                        echo '<td><img src="assets/img/' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
+                                        echo '<td><img src="assets/img/gallery/' . htmlspecialchars($row['gambar']) . '" alt="' . htmlspecialchars($row['kegiatan']) . '" style="width: 100px; height: auto;"></td>';
                                         echo '<td>';
-                                        echo '<a href="action/add.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-primary btn-sm">Add</a> ';
-                                        echo '<a href="action/edit.php?id=' . htmlspecialchars($row['id_pic']) . '" class="btn btn-secondary btn-sm">Edit</a> ';
-                                        echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_pic']) . '&type=galeri" class="btn btn-danger btn-sm">Delete</a>';
+                                        echo '<a href="#" class="btn btn-secondary btn-sm edit-gallery" data-id="' . htmlspecialchars($row['id_pic']) . '">Edit</a> ';
+                                        echo '<a href="action/delete.php?id=' . htmlspecialchars($row['id_pic']) . '&type=galeri" class="btn btn-danger btn-sm">Hapus</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }
                                     ?>
 
                                     <?php
+                                    $message = '';
                                     if (isset($_GET['message']) && $_GET['message'] == 'deleted') {
-                                        echo '<div class="alert alert-success">Record deleted successfully.</div>';
+                                        $message = '<div class="alert alert-success">Berhasil menghapus Gallery.</div>';
+                                    } elseif (isset($_GET['message']) && $_GET['message'] == 'edited') {
+                                        $message = '<div class="alert alert-success">Berhasil mengedit Gallery.</div>';
                                     }
                                     ?>
 
@@ -182,12 +192,33 @@ require_once 'koneksi.php';
     <!-- End of Page Wrapper -->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var editButtons = document.querySelectorAll('.edit-gallery');
+
+            editButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var id = this.getAttribute('data-id');
+
+                    // Fetch data galeri yang akan diedit
+                    fetch('action/gallery/editAction.php?id=' + id)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('editGalleryTitle').value = data.kegiatan;
+                            document.getElementById('editGalleryId').value = data.id_pic;
+                            document.getElementById('currentImage').innerHTML = 'Gambar saat ini: <img src="assets/img/gallery/' + data.gambar + '" style="width: 100px; height: auto;">';
+                            $('#editGalleryModal').modal('show');
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

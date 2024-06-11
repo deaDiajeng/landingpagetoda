@@ -29,6 +29,21 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
 
     // Determine the appropriate delete query based on the type
     if ($type === 'galeri') {
+        // Query to get the image path before deleting the record
+        $stmt = $pdo->prepare('SELECT gambar FROM galeri WHERE id_pic = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $imageData = $stmt->fetch();
+
+        if ($imageData) {
+            // Delete image file
+            $imagePath = '../assets/img/gallery/' . $imageData['gambar']; // Sesuaikan dengan path direktori gambar
+            if (file_exists($imagePath)) {
+                unlink($imagePath); // Hapus file dari direktori
+            }
+        }
+
+        // Delete gallery record
         $sql = 'DELETE FROM galeri WHERE id_pic = :id';
     } elseif ($type === 'guru') {
         $sql = 'DELETE FROM guru WHERE id_teach = :id';

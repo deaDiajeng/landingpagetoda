@@ -10,11 +10,11 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Handle login request if there is one
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($_POST['password'])) {
         // Get data from form
         $username = $_POST['username'];
         $password = $_POST['password'];
-        
+
         // Query to check user credentials
         $stmt = $conn->prepare("SELECT * FROM user WHERE username = :username AND password = :password");
         $stmt->bindParam(':username', $username);
