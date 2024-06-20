@@ -42,6 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if form is submitted
     if (!empty($_POST['pelId']) && !empty($_POST['pelTitle'])) {
+        // Create PDO instance
+        $pdo = new PDO($dsn, $user, $pass, $options);
+
+        // Fetch the current image path
+        $stmt = $pdo->prepare('SELECT gambar FROM pelajaran WHERE id_pel = :id');
+        $stmt->bindParam(':id', $_POST['pelId'], PDO::PARAM_INT);
+        $stmt->execute();
+        $currentImage = $stmt->fetchColumn();
+
         // Prepare update query
         $sql = "UPDATE pelajaran SET judul = :judul, ket = :ket";
 
@@ -51,11 +60,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             $uploadDir = '../../assets/img/alur/'; // Make sure this directory exists and is writable
             $imageFilename = basename($_FILES['pelImage']['name']);
             $imagePath = $uploadDir . $imageFilename;
+            $imageDatabasePath = $imageFilename; // Path to store in the database
 
             // Move the uploaded file
             if (move_uploaded_file($_FILES['pelImage']['tmp_name'], $imagePath)) {
-                // Add image filename to update query
+                // Add image path to update query
                 $sql .= ", gambar = :gambar";
+
+                // Delete the old image file
+                if ($currentImage) {
+                    $oldImagePath = $uploadDir . $currentImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
             } else {
                 echo 'Failed to move the uploaded file.';
                 exit;
@@ -65,9 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $sql .= " WHERE id_pel = :id";
 
         try {
-            // Create PDO instance
-            $pdo = new PDO($dsn, $user, $pass, $options);
-
             // Prepare the SQL statement
             $stmt = $pdo->prepare($sql);
 
@@ -76,9 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             $stmt->bindParam(':judul', $_POST['pelTitle'], PDO::PARAM_STR);
             $stmt->bindParam(':ket', $_POST['pelKet'], PDO::PARAM_STR);
 
-            // If image is uploaded, bind image filename parameter
-            if (isset($imageFilename)) {
-                $stmt->bindParam(':gambar', $imageFilename, PDO::PARAM_STR);
+            // If image is uploaded, bind image path parameter
+            if (isset($imageDatabasePath)) {
+                $stmt->bindParam(':gambar', $imageDatabasePath, PDO::PARAM_STR);
             }
 
             // Execute the statement

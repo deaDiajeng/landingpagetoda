@@ -42,6 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if form is submitted
     if (!empty($_POST['guruId']) && !empty($_POST['guruTitle']) && !empty($_POST['guruJbt'])) {
+        // Create PDO instance
+        $pdo = new PDO($dsn, $user, $pass, $options);
+
+        // Fetch the current image path
+        $stmt = $pdo->prepare('SELECT foto FROM guru WHERE id_teach = :id');
+        $stmt->bindParam(':id', $_POST['guruId'], PDO::PARAM_INT);
+        $stmt->execute();
+        $currentImage = $stmt->fetchColumn();
+
         // Prepare update query
         $sql = "UPDATE guru SET nama = :nama, jabatan = :jabatan";
 
@@ -55,8 +64,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
             // Move the uploaded file
             if (move_uploaded_file($_FILES['guruImage']['tmp_name'], $imagePath)) {
-                // Add image filename to update query
+                // Add image path to update query
                 $sql .= ", foto = :foto";
+
+                // Delete the old image file
+                if ($currentImage) {
+                    $oldImagePath = $uploadDir . $currentImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
             } else {
                 echo 'Failed to move the uploaded file.';
                 exit;
@@ -66,9 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $sql .= " WHERE id_teach = :id";
 
         try {
-            // Create PDO instance
-            $pdo = new PDO($dsn, $user, $pass, $options);
-
             // Prepare the SQL statement
             $stmt = $pdo->prepare($sql);
 
@@ -77,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             $stmt->bindParam(':nama', $_POST['guruTitle'], PDO::PARAM_STR);
             $stmt->bindParam(':jabatan', $_POST['guruJbt'], PDO::PARAM_STR);
 
-            // If image is uploaded, bind image filename parameter
+            // If image is uploaded, bind image path parameter
             if (isset($imageDatabasePath)) {
                 $stmt->bindParam(':foto', $imageDatabasePath, PDO::PARAM_STR);
             }

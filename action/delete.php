@@ -55,9 +55,13 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
 
     if ($imageData) {
         // Delete image file
-        $imagePath = $imagePathPrefix . $imageData['gambar']; // Sesuaikan dengan path direktori gambar
+        if ($type === 'guru') {
+            $imagePath = $imagePathPrefix . $imageData['foto']; // Adjust the path for 'guru'
+        } else {
+            $imagePath = $imagePathPrefix . $imageData['gambar']; // Adjust the path for other types
+        }
         if (file_exists($imagePath)) {
-            unlink($imagePath); // Hapus file dari direktori
+            unlink($imagePath); // Delete the file from the directory
         }
     }
 

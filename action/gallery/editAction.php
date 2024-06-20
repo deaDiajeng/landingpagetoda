@@ -42,6 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if form is submitted
     if (!empty($_POST['galleryId']) && !empty($_POST['galleryTitle'])) {
+        // Create PDO instance
+        $pdo = new PDO($dsn, $user, $pass, $options);
+
+        // Fetch the current image path
+        $stmt = $pdo->prepare('SELECT gambar FROM galeri WHERE id_pic = :id');
+        $stmt->bindParam(':id', $_POST['galleryId'], PDO::PARAM_INT);
+        $stmt->execute();
+        $currentImage = $stmt->fetchColumn();
+
         // Prepare update query
         $sql = "UPDATE galeri SET kegiatan = :kegiatan";
 
@@ -57,6 +66,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             if (move_uploaded_file($_FILES['galleryImage']['tmp_name'], $imagePath)) {
                 // Add image path to update query
                 $sql .= ", gambar = :gambar";
+
+                // Delete the old image file
+                if ($currentImage) {
+                    $oldImagePath = $uploadDir . $currentImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
             } else {
                 echo 'Failed to move the uploaded file.';
                 exit;
@@ -66,9 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $sql .= " WHERE id_pic = :id";
 
         try {
-            // Create PDO instance
-            $pdo = new PDO($dsn, $user, $pass, $options);
-
             // Prepare the SQL statement
             $stmt = $pdo->prepare($sql);
 
