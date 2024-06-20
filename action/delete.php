@@ -26,32 +26,39 @@ try {
 if (isset($_GET['id']) && isset($_GET['type'])) {
     $id = (int)$_GET['id'];
     $type = $_GET['type'];
-
-    // Determine the appropriate delete query based on the type
+    
+    // Determine the appropriate delete query and image path based on the type
     if ($type === 'galeri') {
-        // Query to get the image path before deleting the record
         $stmt = $pdo->prepare('SELECT gambar FROM galeri WHERE id_pic = :id');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $imageData = $stmt->fetch();
-
-        if ($imageData) {
-            // Delete image file
-            $imagePath = '../assets/img/gallery/' . $imageData['gambar']; // Sesuaikan dengan path direktori gambar
-            if (file_exists($imagePath)) {
-                unlink($imagePath); // Hapus file dari direktori
-            }
-        }
-
-        // Delete gallery record
+        $imagePathPrefix = '../assets/img/gallery/';
         $sql = 'DELETE FROM galeri WHERE id_pic = :id';
+        $redirectLocation = '../galerids.php';
     } elseif ($type === 'guru') {
+        $stmt = $pdo->prepare('SELECT foto FROM guru WHERE id_teach = :id');
+        $imagePathPrefix = '../assets/img/guru/';
         $sql = 'DELETE FROM guru WHERE id_teach = :id';
+        $redirectLocation = '../guruds.php';
     } elseif ($type === 'pelajaran') {
+        $stmt = $pdo->prepare('SELECT gambar FROM pelajaran WHERE id_pel = :id');
+        $imagePathPrefix = '../assets/img/alur/';
         $sql = 'DELETE FROM pelajaran WHERE id_pel = :id';
+        $redirectLocation = '../pelajarands.php';
     } else {
         echo 'Invalid type provided.';
         exit;
+    }
+
+    // Get the image path before deleting the record
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $imageData = $stmt->fetch();
+
+    if ($imageData) {
+        // Delete image file
+        $imagePath = $imagePathPrefix . $imageData['gambar']; // Sesuaikan dengan path direktori gambar
+        if (file_exists($imagePath)) {
+            unlink($imagePath); // Hapus file dari direktori
+        }
     }
 
     // Prepare the delete query
@@ -63,7 +70,7 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
     // Execute the query
     if ($stmt->execute()) {
         // Success message or redirect
-        header("Location: ../galerids.php?message=deleted");
+        header("Location: " . $redirectLocation);
         exit;
     } else {
         echo 'Failed to delete the record.';

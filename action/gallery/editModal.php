@@ -2,17 +2,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editGalleryModalLabel">Edit Gallery</h5>
+                <h5 class="modal-title" id="editGalleryModalLabel">Edit Galeri</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form edit gallery -->
+                <!-- Form edit galeri -->
                 <form id="editGalleryForm" action="action/gallery/editAction.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="editGalleryTitle">Kegiatan</label>
-                        <input type="text" class="form-control" id="editGalleryTitle" name="galleryTitle" placeholder="Kegiatan">
+                        <input type="text" class="form-control" id="editGalleryTitle" name="galleryTitle" placeholder="Kegiatan" required>
                     </div>
                     <div class="form-group">
                         <label for="editGalleryImage">Gambar</label>
@@ -21,7 +21,7 @@
                     </div>
                     <input type="hidden" name="galleryId" id="editGalleryId">
                 
-                    <!-- Move the button inside the form -->
+                    <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="editGalleryBtn">Simpan</button>

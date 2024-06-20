@@ -12,9 +12,10 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $guruTitle = $_POST['guruTitle'];
+        $guruJbt = $_POST['guruJbt'];
 
         // Mengunggah gambar
-        $targetDir = "../../assets/img/team/";
+        $targetDir = "../../assets/img/guru/";
         $targetFile = $targetDir . basename($_FILES["guruImage"]["name"]);
         $uploadOk = 1;
 
@@ -49,11 +50,11 @@ try {
         } else {
             if (move_uploaded_file($_FILES["guruImage"]["tmp_name"], $targetFile)) {
                 // Gambar berhasil diunggah, simpan data ke database
-                $sql = "INSERT INTO guru (nama, img, jabatan) VALUES (:nama, :img, :jabatan)";
+                $sql = "INSERT INTO guru (nama, foto, jabatan) VALUES (:nama, :foto, :jabatan)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':nama', $guruTitle);
-                $stmt->bindParam(':img', $gambar);
-                $stmt->bindParam(':jabatan', $Jbt);
+                $stmt->bindParam(':foto', $gambar);
+                $stmt->bindParam(':jabatan', $guruJbt);
 
                 if ($stmt->execute()) {
                     echo "<script>alert('New record created successfully');</script>";

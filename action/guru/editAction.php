@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         // Create PDO instance
         $pdo = new PDO($dsn, $user, $pass, $options);
 
-        // SQL query to fetch data from galeri table based on ID
+        // SQL query to fetch data from guru table based on ID
         $sql = 'SELECT id_teach, nama, jabatan, foto FROM guru WHERE id_teach = :id';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -41,20 +41,26 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     }
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if form is submitted
-    if (!empty($_POST['guruId']) && !empty($_POST['guruTitle'])) {
+    if (!empty($_POST['guruId']) && !empty($_POST['guruTitle']) && !empty($_POST['guruJbt'])) {
         // Prepare update query
-        $sql = "UPDATE guru SET nama = :nama";
+        $sql = "UPDATE guru SET nama = :nama, jabatan = :jabatan";
 
         // Check if image is uploaded
         if ($_FILES['guruImage']['error'] === UPLOAD_ERR_OK) {
             // Get the file path
-            $imagePath = 'assets/img/team/' . basename($_FILES['guruImage']['name']);
-            
-            // Move the uploaded file
-            move_uploaded_file($_FILES['guruImage']['tmp_name'], $imagePath);
+            $uploadDir = '../../assets/img/guru/'; // Directory to store the uploaded image
+            $imageFilename = basename($_FILES['guruImage']['name']);
+            $imagePath = $uploadDir . $imageFilename;
+            $imageDatabasePath = $imageFilename; // Path to store in the database
 
-            // Add image path to update query
-            $sql = "UPDATE guru SET nama = :nama, foto = :foto, jabatan = :jabatan";
+            // Move the uploaded file
+            if (move_uploaded_file($_FILES['guruImage']['tmp_name'], $imagePath)) {
+                // Add image filename to update query
+                $sql .= ", foto = :foto";
+            } else {
+                echo 'Failed to move the uploaded file.';
+                exit;
+            }
         }
 
         $sql .= " WHERE id_teach = :id";
@@ -69,10 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             // Bind parameters
             $stmt->bindParam(':id', $_POST['guruId'], PDO::PARAM_INT);
             $stmt->bindParam(':nama', $_POST['guruTitle'], PDO::PARAM_STR);
+            $stmt->bindParam(':jabatan', $_POST['guruJbt'], PDO::PARAM_STR);
 
-            // If image is uploaded, bind image path parameter
-            if (isset($imagePath)) {
-                $stmt->bindParam(':foto', $imagePath, PDO::PARAM_STR);
+            // If image is uploaded, bind image filename parameter
+            if (isset($imageDatabasePath)) {
+                $stmt->bindParam(':foto', $imageDatabasePath, PDO::PARAM_STR);
             }
 
             // Execute the statement

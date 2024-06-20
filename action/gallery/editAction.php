@@ -48,13 +48,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         // Check if image is uploaded
         if ($_FILES['galleryImage']['error'] === UPLOAD_ERR_OK) {
             // Get the file path
-            $imagePath = 'assets/img/gallery/' . basename($_FILES['galleryImage']['name']);
-            
-            // Move the uploaded file
-            move_uploaded_file($_FILES['galleryImage']['tmp_name'], $imagePath);
+            $uploadDir = '../../assets/img/gallery/'; // Directory to store the uploaded image
+            $imageFilename = basename($_FILES['galleryImage']['name']);
+            $imagePath = $uploadDir . $imageFilename;
+            $imageDatabasePath = $imageFilename; // Path to store in the database
 
-            // Add image path to update query
-            $sql = "UPDATE galeri SET kegiatan = :kegiatan, gambar = :gambar";
+            // Move the uploaded file
+            if (move_uploaded_file($_FILES['galleryImage']['tmp_name'], $imagePath)) {
+                // Add image path to update query
+                $sql .= ", gambar = :gambar";
+            } else {
+                echo 'Failed to move the uploaded file.';
+                exit;
+            }
         }
 
         $sql .= " WHERE id_pic = :id";
@@ -71,14 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             $stmt->bindParam(':kegiatan', $_POST['galleryTitle'], PDO::PARAM_STR);
 
             // If image is uploaded, bind image path parameter
-            if (isset($imagePath)) {
-                $stmt->bindParam(':gambar', $imagePath, PDO::PARAM_STR);
+            if (isset($imageDatabasePath)) {
+                $stmt->bindParam(':gambar', $imageDatabasePath, PDO::PARAM_STR);
             }
 
             // Execute the statement
             if ($stmt->execute()) {
                 // Success message or redirect
-                echo '<script>alert("Berhasil mengedit Gallery."); window.location.href = "../../galerids.php";</script>';
+                echo '<script>alert("Berhasil mengedit Galeri."); window.location.href = "../../galerids.php";</script>';
                 exit;
             } else {
                 echo 'Failed to edit the record.';
