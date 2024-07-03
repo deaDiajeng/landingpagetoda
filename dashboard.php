@@ -11,25 +11,15 @@ include 'content/header-ds.php';
 
                     <!-- Sample Content -->
                     <div class="row">
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-12 mb-4">
                             <!-- Content Sample 1 -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4 text-center">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Content Sample 1</h6>
+                                    <h6 class="m-2 font-weight-bold text-primary">WELCOME</h6>
+                                    <p>To the Dashboard</p>
                                 </div>
-                                <div class="card-body">
-                                    <p>This is a sample content section.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-4">
-                            <!-- Content Sample 2 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Content Sample 2</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>This is another sample content section.</p>
+                                <div class="card-body font-weight-bold text-center">
+                                    <p>Admin dea</p>
                                 </div>
                             </div>
                         </div>

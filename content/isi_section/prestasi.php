@@ -1,7 +1,4 @@
-<?php include 'action/guru/fetchData.php'; ?>
-
-<!-- Team -->
-<section class="page-section bg-light" id="team">
+<!-- <section class="page-section bg-light" id="pretasi">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Pengajar</h2>
@@ -24,4 +21,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->

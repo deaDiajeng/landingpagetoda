@@ -42,11 +42,13 @@
             <li class="timeline-inverted">
             <div class="timeline-image">
                 <h4 style="margin-top: 10px;">
-                    Come
+                    Yukk
                     <br />
-                    Join Us
+                    Bergabung
                     <br />
-                    Together
+                    Bersama 
+                    <br />
+                    Kami
                 </h4>
             </div>
             </li>
