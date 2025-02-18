@@ -4,8 +4,8 @@
 <section class="page-section bg-light" id="team">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Pengajar</h2>
-            <h3 class="section-subheading text-muted">Guru yang sudah bersertifikasi</h3>
+            <h2 class="section-heading text-uppercase">Acara</h2>
+            <!-- <h3 class="section-subheading text-muted">Guru yang sudah bersertifikasi</h3> -->
         </div>
         <div class="row">
             <?php foreach ($guru as $teacher): ?>

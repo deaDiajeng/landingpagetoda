@@ -21,8 +21,8 @@
 <section class="page-section" id="about">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Pelajaran</h2>
-            <h3 class="section-subheading text-muted">Alur pembelajaran dari pembukaan hingga doa penutup</h3>
+            <h2 class="section-heading text-uppercase">HAFALAN</h2>
+            <h3 class="section-subheading text-muted">Capaian Hafalan para santri sehari-hari</h3>
         </div>
         <ul class="timeline">
             <?php foreach ($pelajaran as $index => $lesson): ?>
@@ -39,7 +39,7 @@
                 </div>
             </li>
             <?php endforeach; ?>
-            <li class="timeline-inverted">
+            <!-- <li class="timeline-inverted">
             <div class="timeline-image">
                 <h4 style="margin-top: 10px;">
                     Yukk
@@ -51,7 +51,7 @@
                     Kami
                 </h4>
             </div>
-            </li>
+            </li> -->
         </ul>
     </div>
 </section>
